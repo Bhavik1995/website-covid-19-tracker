@@ -1,0 +1,62 @@
+<div class="container-fluid sub_section pt-5 pb-5" id="caseid">
+	<div class="section_header text-center mb-5 mt-4">
+		<h1 class="text-capitalize">Covid-19 India Live Cases (State-Wise)</h1>
+	</div>
+
+   <section class="corona_update container_fluid">
+
+	   <div class="table-responsive">	  
+		   <table id="tbval" class="table table-bodered table-striped text-center">
+			<tr>
+				   <th>Last Update</th>
+				   <th>State</th>
+				   <th>Confirmed</th>
+				   <th>Active</th>
+				   <th>Deaths</th>
+				   <th>Recover</th>
+			</tr>		  
+	   </table>
+
+	   </div>
+   </section>
+</div>
+
+  <script>
+   function fetch(){
+	   $.get("https://api.covid19india.org/data.json",
+	      
+		  function(data){
+			  var tbval = document.getElementById('tbval');
+
+			  for(var i = 1; i<(data['statewise'].length); i++){
+				  var x = tbval.insertRow();
+
+				  x.insertCell(0);
+
+				  tbval.rows[i].cells[0].innerHTML = data['statewise'][i-0].lastupdatedtime;
+
+				  x.insertCell(1);
+
+				  tbval.rows[i].cells[1].innerHTML = data['statewise'][i-1].state;
+
+				  x.insertCell(2);
+
+				  tbval.rows[i].cells[2].innerHTML = data['statewise'][i-1].confirmed;
+
+				  x.insertCell(3);
+
+				  tbval.rows[i].cells[3].innerHTML = data['statewise'][i-1].active;
+
+				  x.insertCell(4);
+
+				  tbval.rows[i].cells[4].innerHTML = data['statewise'][i-1].deaths
+
+				  x.insertCell(5);
+
+				  tbval.rows[i].cells[5].innerHTML = data['statewise'][i-1].recovered;
+
+			  }
+		  }
+	   )
+   }
+</script>
